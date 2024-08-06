@@ -1,6 +1,6 @@
 name: coastal
 channels:
-  - ufs-community
+  - local # ufs-community
 dependencies:
   - black
   - mypy
