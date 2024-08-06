@@ -1,0 +1,8 @@
+name: coastal
+channels:
+  - ufs-community
+dependencies:
+  - black
+  - mypy
+  - pylint
+  - uwtools
