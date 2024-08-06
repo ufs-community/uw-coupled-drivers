@@ -1,7 +1,7 @@
 dir:
-  data: /home/maddenp/coastal/data
-  model: /home/maddenp/coastal/model
-  run: /home/maddenp/coastal/run
+  data: input/data
+  model: input/model
+  run: run
 platform:
   account: me
   scheduler: slurm
@@ -25,7 +25,7 @@ coastal:
     envcmds:
       - module use {{ dir.model }}/modulefiles
       - module load ufs_hercules.intel
-    executable: /bin/true # /path/to/ufs_model
+    executable: /path/to/ufs_model
     mpiargs:
       - '--export=ALL'
       - '--ntasks $SLURM_CPUS_ON_NODE'
@@ -80,9 +80,9 @@ cdeps:
         yearAlign: 2008
         yearFirst: 2008
         yearLast: 2008
-    template_file: stream.jinja2
+    template_file: input/stream.jinja2
 schism:
   namelist:
-    template_file: param.nml
+    template_file: input/param.nml
     template_values:
       dt: 300
