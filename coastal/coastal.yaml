@@ -79,5 +79,3 @@ platform:
 schism:
   namelist:
     template_file: input/param.nml
-    template_values:
-      dt: 300
