@@ -28,7 +28,7 @@ coastal:
     executable: /path/to/ufs_model
     mpiargs:
       - '--export=ALL'
-      - '--ntasks $SLURM_CPUS_ON_NODE'
+      - '--ntasks 6'
       - '--account=nems'
     mpicmd: srun
   links:
