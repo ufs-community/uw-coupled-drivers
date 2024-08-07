@@ -36,7 +36,7 @@ cdeps:
         yearAlign: 2008
         yearFirst: 2008
         yearLast: 2008
-    template_file: input/stream.jinja2
+    template_file: '{{ dir.test }}/stream.jinja2'
 coastal:
   execution:
     batchargs:
@@ -71,11 +71,12 @@ coastal:
     windrot_geo2proj.gr3: '{{ dir.data }}/windrot_geo2proj.gr3'
   rundir: run
 dir:
-  data: input/data
-  model: input/model
+  test: /home/maddenp/save/coastal-input
+  data: '{{ dir.test }}//data'
+  model: '{{ dir.test }}//model'
 platform:
   account: me
   scheduler: slurm
 schism:
   namelist:
-    template_file: input/param.nml
+    template_file: '{{ dir.test }}/param.nml'
