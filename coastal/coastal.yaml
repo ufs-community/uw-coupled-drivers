@@ -61,7 +61,7 @@ cdeps:
         stream_lev_dimname: 'null'
         stream_mesh_file: INPUT/esmf_mesh.nc
         stream_offset: 0
-        stream_vectors: [u, v]
+        stream_vectors: 'null'
         taxmode: limit 
         tinterpalgo: linear
         yearAlign: 2008

@@ -16,11 +16,11 @@ class Coastal(DriverCycleBased):
     @task
     def linked_files(self):
         """
-        Link data files into the run directory.
+        Data files linked into the run directory.
         """
         links = self.config["links"]
         path = lambda fn: self.rundir / fn
-        yield "Linked files"
+        yield self.taskname("Linked files")
         yield [asset(path(fn), path(fn).is_file) for fn in links.keys()]
         yield None
         link(config=links, target_dir=self.rundir)
@@ -28,18 +28,30 @@ class Coastal(DriverCycleBased):
     @tasks
     def provisioned_rundir(self):
         """
-        Provision the run directory with all required content.
+        The run directory provisioned with all required content.
         """
         cdeps = CDEPS(config=self.config_full, cycle=self.cycle, controller=self._driver_name)
         schism = SCHISM(config=self.config_full, cycle=self.cycle, controller=self._driver_name)
-        yield "Provisioned run directory"
+        yield self.taskname("Provisioned run directory")
         yield [
             cdeps.atm_nml(),
             cdeps.atm_stream(),
             schism.namelist_file(),
             self.linked_files(),
+            self.restart_dir(),
             self.runscript(),
         ]
+
+    @task
+    def restart_dir(self):
+        """
+        RESTART directory in run directory.
+        """
+        path = self.rundir / "RESTART"
+        yield self.taskname("RESTART directory")
+        yield asset(path, path.is_dir)
+        yield None
+        path.mkdir(parents=True)
 
     @property
     def _driver_name(self):
