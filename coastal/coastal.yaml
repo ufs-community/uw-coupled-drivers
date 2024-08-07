@@ -1,7 +1,6 @@
 dir:
   data: input/data
   model: input/model
-  run: run
 platform:
   account: me
   scheduler: slurm
@@ -9,27 +8,15 @@ coastal:
   execution:
     batchargs:
       cores: 6 
-      debug: True
-      exclusive: True
       export: NONE
-      jobname: my-job
-      nodes: 1
+      jobname: coastal
       partition: hercules
       queue: batch
-      rundir: '{{ dir.run }}'
-      shell: /bin/bash
-      stderr: '{{ dir.run }}/err'
-      stdout: '{{ dir.run }}/out'
-      tasks_per_node: 6
       walltime: '00:30:00'
     envcmds:
       - module use {{ dir.model }}/modulefiles
       - module load ufs_hercules.intel
     executable: /path/to/ufs_model
-    mpiargs:
-      - '--export=ALL'
-      - '--ntasks 6'
-      - '--account=nems'
     mpicmd: srun
   links:
     albedo.gr3: '{{ dir.data }}/albedo.gr3'
@@ -45,7 +32,7 @@ coastal:
     vgrid.in: '{{ dir.data }}/vgrid.in'
     watertype.gr3: '{{ dir.data }}/watertype.gr3'
     windrot_geo2proj.gr3: '{{ dir.data }}/windrot_geo2proj.gr3'
-  rundir: '{{ dir.run }}'
+  rundir: run
 cdeps:
   atm_in:
     update_values:
