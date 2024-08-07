@@ -22,7 +22,7 @@ cdeps:
         mapalgo: redist
         readmode: single
         stream_data_files:
-          - INPUT/wind_atm_fin_ch_time_vec_STR_fixed.nc
+          - INPUT/data.nc
         stream_data_variables:
           - uwnd Sa_u10m
           - vwnd Sa_v10m
@@ -50,8 +50,12 @@ coastal:
       - module use {{ dir.model }}/modulefiles
       - module load ufs_hercules.intel
     executable: /path/to/ufs_model
+    mpiargs:
+      - '--export=ALL'
     mpicmd: srun
   links:
+    INPUT/data.nc: '{{ dir.data }}/INPUT/wind_atm_fin_ch_time_vec_STR_fixed.nc'
+    INPUT/esmf_mesh.nc: '{{ dir.data }}/INPUT/wind_atm_fin_ch_time_vec_ESMFmesh.nc'
     albedo.gr3: '{{ dir.data }}/albedo.gr3'
     bctides.in: '{{ dir.data }}/bctides.in'
     fd_ufs.yaml: '{{ dir.model }}/tests/parm/fd_ufs.yaml'
