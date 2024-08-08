@@ -36,7 +36,7 @@ cdeps:
         yearAlign: 2008
         yearFirst: 2008
         yearLast: 2008
-    template_file: '{{ dir.test }}/stream.jinja2'
+    template_file: stream.jinja2
 coastal:
   execution:
     batchargs:
