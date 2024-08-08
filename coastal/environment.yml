@@ -6,4 +6,4 @@ dependencies:
   - black
   - mypy
   - pylint
-  - uwtools
+  - uwtools >=2.4.0

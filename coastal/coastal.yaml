@@ -71,7 +71,7 @@ coastal:
     windrot_geo2proj.gr3: '{{ dir.data }}/windrot_geo2proj.gr3'
   rundir: run
 dir:
-  test: /home/maddenp/save/coastal-input
+  test: /path/to/coastal/test/input
   data: '{{ dir.test }}//data'
   model: '{{ dir.test }}//model'
 platform:
