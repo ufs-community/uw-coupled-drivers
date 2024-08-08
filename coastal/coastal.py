@@ -30,8 +30,8 @@ class Coastal(DriverCycleBased):
         """
         The run directory provisioned with all required content.
         """
-        cdeps = CDEPS(config=self.config_full, cycle=self.cycle, controller=self._driver_name)
-        schism = SCHISM(config=self.config_full, cycle=self.cycle, controller=self._driver_name)
+        cdeps = CDEPS(config=self.config_full, cycle=self.cycle, controller=self.driver_name)
+        schism = SCHISM(config=self.config_full, cycle=self.cycle, controller=self.driver_name)
         yield self.taskname("Provisioned run directory")
         yield [
             cdeps.atm_nml(),
@@ -54,5 +54,5 @@ class Coastal(DriverCycleBased):
         path.mkdir(parents=True)
 
     @property
-    def _driver_name(self):
+    def driver_name(self):
         return "coastal"
