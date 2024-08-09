@@ -1,0 +1,82 @@
+cdeps:
+  atm_in:
+    update_values:
+      datm_nml:
+        datamode: ATMMESH
+        export_all: true
+        factorfn_data: 'null'
+        factorfn_mesh: 'null'
+        flds_co2: false
+        flds_presaero: false
+        flds_wiso: false
+        iradsw: 1
+        model_maskfile: INPUT/esmf_mesh.nc
+        model_meshfile: INPUT/esmf_mesh.nc
+        nx_global: 101
+        ny_global: 101
+        restfilm: 'null'
+  atm_streams:
+    streams:
+      stream01:
+        dtlimit: 1.5
+        mapalgo: redist
+        readmode: single
+        stream_data_files:
+          - INPUT/data.nc
+        stream_data_variables:
+          - uwnd Sa_u10m
+          - vwnd Sa_v10m
+          - P Sa_pslv
+        stream_lev_dimname: 'null'
+        stream_mesh_file: INPUT/esmf_mesh.nc
+        stream_offset: 0
+        stream_vectors: 'null'
+        taxmode: limit
+        tinterpalgo: linear
+        yearAlign: 2008
+        yearFirst: 2008
+        yearLast: 2008
+    template_file: stream.jinja2
+coastal:
+  execution:
+    batchargs:
+      cores: 6
+      export: NONE
+      jobname: coastal
+      partition: hercules
+      queue: batch
+      walltime: '00:30:00'
+    envcmds:
+      - module use {{ dir.model }}/modulefiles
+      - module load ufs_hercules.intel
+    executable: /path/to/ufs_model
+    mpiargs:
+      - '--export=ALL'
+    mpicmd: srun
+  links:
+    INPUT/data.nc: '{{ dir.data }}/INPUT/wind_atm_fin_ch_time_vec_STR_fixed.nc'
+    INPUT/esmf_mesh.nc: '{{ dir.data }}/INPUT/wind_atm_fin_ch_time_vec_ESMFmesh.nc'
+    albedo.gr3: '{{ dir.data }}/albedo.gr3'
+    bctides.in: '{{ dir.data }}/bctides.in'
+    fd_ufs.yaml: '{{ dir.model }}/tests/parm/fd_ufs.yaml'
+    hgrid.gr3: '{{ dir.data }}/hgrid.gr3'
+    hgrid.ll: '{{ dir.data }}/hgrid.ll'
+    manning.gr3: '{{ dir.data }}/manning.gr3'
+    model_configure: '{{ dir.data }}/model_configure'
+    noahmptable.tbl: '{{ dir.data }}/noahmptable.tbl'
+    station.in: '{{ dir.data }}/station.in'
+    ufs.configure: '{{ dir.data }}/ufs.configure'
+    vgrid.in: '{{ dir.data }}/vgrid.in'
+    watertype.gr3: '{{ dir.data }}/watertype.gr3'
+    windrot_geo2proj.gr3: '{{ dir.data }}/windrot_geo2proj.gr3'
+  rundir: run
+dir:
+  test: /path/to/coastal/test/input
+  data: '{{ dir.test }}//data'
+  model: '{{ dir.test }}//model'
+platform:
+  account: me
+  scheduler: slurm
+schism:
+  namelist:
+    template_file: '{{ dir.test }}/param.nml'
