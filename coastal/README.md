@@ -1,6 +1,6 @@
 # Coastal
 
-Example `uwtools` invocation:
+To execute this driver, in a conda environment where [`uwtools`](https://github.com/ufs-community/uwtools) is [installed](https://uwtools.readthedocs.io/en/stable/sections/user_guide/installation.html):
 
 ```
 uw execute --module coastal.py --classname Coastal --task provisioned_rundir --config-file coastal.yaml --cycle 2024-08-05T12 --batch
@@ -42,4 +42,5 @@ For development/testing, with conda active in your shell:
 
 ```
 $ conda env create -f environment.yml
+$ conda activate coastal
 ```
