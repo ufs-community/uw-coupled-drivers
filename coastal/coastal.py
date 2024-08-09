@@ -1,3 +1,7 @@
+"""
+A driver for the Coastal App coupled executable.
+"""
+
 from iotaa import asset, task, tasks
 from uwtools.api.cdeps import CDEPS
 from uwtools.api.driver import DriverCycleBased
