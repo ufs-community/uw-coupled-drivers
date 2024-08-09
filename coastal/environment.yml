@@ -1,0 +1,9 @@
+name: coastal
+channels:
+  - ufs-community
+  - conda-forge
+dependencies:
+  - black
+  - mypy
+  - pylint
+  - uwtools >=2.4.0
