@@ -1,6 +1,6 @@
 name: coastal
 channels:
-  - local # ufs-community
+  - ufs-community
   - conda-forge
 dependencies:
   - black
