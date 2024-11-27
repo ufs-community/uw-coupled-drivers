@@ -5,7 +5,7 @@ A driver for the Coastal App coupled executable.
 from iotaa import asset, task, tasks
 from uwtools.api.cdeps import CDEPS
 from uwtools.api.driver import DriverCycleBased
-from uwtools.api.file import link
+from uwtools.api.fs import link
 from uwtools.api.logging import use_uwtools_logger
 from uwtools.api.schism import SCHISM
 
@@ -34,8 +34,8 @@ class Coastal(DriverCycleBased):
         """
         The run directory provisioned with all required content.
         """
-        cdeps = CDEPS(config=self.config_full, cycle=self.cycle, controller=self.driver_name)
-        schism = SCHISM(config=self.config_full, cycle=self.cycle, controller=self.driver_name)
+        cdeps = CDEPS(config=self.config_full, cycle=self.cycle, controller=[self.driver_name()])
+        schism = SCHISM(config=self.config_full, cycle=self.cycle, controller=[self.driver_name()])
         yield self.taskname("Provisioned run directory")
         yield [
             cdeps.atm_nml(),
@@ -57,6 +57,5 @@ class Coastal(DriverCycleBased):
         yield None
         path.mkdir(parents=True)
 
-    @property
     def driver_name(self):
         return "coastal"
