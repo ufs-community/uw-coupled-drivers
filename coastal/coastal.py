@@ -2,7 +2,7 @@
 A driver for the Coastal App coupled executable.
 """
 
-from iotaa import Asset, task, collection
+from iotaa import Asset, collection, task
 from uwtools.api.cdeps import CDEPS
 from uwtools.api.driver import DriverCycleBased
 from uwtools.api.fs import link
